@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="bauamt">
+        <createTable tableName="ANTRAG">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ANTRAG"/>
+            </column>
+            <column name="ANTRAGSART" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="AKTENZEICHEN" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ANTRAGSEINGANG" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BAUHERR_ID" type="UUID"/>
+            <column name="VORHABENTEXT" type="CLOB"/>
+            <column name="ENTWURFSVERFASSER_ID" type="UUID"/>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="bauamt">
+        <createTable tableName="BAUHERR">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_BAUHERR"/>
+            </column>
+            <column name="JURISTISCHE_PERSON" type="BOOLEAN"/>
+            <column name="ANREDE" type="VARCHAR(255)"/>
+            <column name="TITEL" type="VARCHAR(255)"/>
+            <column name="VORNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NACHNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAMENSZUSATZ1" type="VARCHAR(255)"/>
+            <column name="NAMESZUSATZ2" type="VARCHAR(255)"/>
+            <column name="STRASSE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HAUSNUMMER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="POSTLEITZAHL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORT" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TELEFON" type="VARCHAR(255)"/>
+            <column name="FAX" type="VARCHAR(255)"/>
+            <column name="MOBIL" type="VARCHAR(255)"/>
+            <column name="EMAIL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="bauamt">
+        <createTable tableName="BAUVORLAGE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_BAUVORLAGE"/>
+            </column>
+            <column name="TYP" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PFLICHT" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATEI" type="CLOB"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="timestamp with time zone"/>
+            <column name="ANTRAG_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="bauamt">
+        <createTable tableName="ENTWURFSVERFASSER">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ENTWURFSVERFASSER"/>
+            </column>
+            <column name="VORNAME" type="VARCHAR(255)"/>
+            <column name="NACHNAME" type="VARCHAR(255)"/>
+            <column name="NAMESZUSATZ1" type="VARCHAR(255)"/>
+            <column name="NAMESZUSATZ2" type="VARCHAR(255)"/>
+            <column name="BERUFSBEZEICHNUNG" type="VARCHAR(255)"/>
+            <column name="STRASSE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HAUSNUMMER" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="POSTLEITZAHL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORT" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="timestamp with time zone"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="timestamp with time zone"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="timestamp with time zone"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="bauamt">
+        <createIndex indexName="IDX_ANTRAG_BAUHERR" tableName="ANTRAG">
+            <column name="BAUHERR_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="BAUHERR_ID" baseTableName="ANTRAG"
+                                 constraintName="FK_ANTRAG_ON_BAUHERR" referencedColumnNames="ID"
+                                 referencedTableName="BAUHERR"/>
+    </changeSet>
+    <changeSet id="6" author="bauamt">
+        <createIndex indexName="IDX_ANTRAG_ENTWURFSVERFASSER" tableName="ANTRAG">
+            <column name="ENTWURFSVERFASSER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="ENTWURFSVERFASSER_ID" baseTableName="ANTRAG"
+                                 constraintName="FK_ANTRAG_ON_ENTWURFSVERFASSER" referencedColumnNames="ID"
+                                 referencedTableName="ENTWURFSVERFASSER"/>
+    </changeSet>
+    <changeSet id="7" author="bauamt">
+        <createIndex indexName="IDX_BAUVORLAGE_ANTRAG" tableName="BAUVORLAGE">
+            <column name="ANTRAG_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="ANTRAG_ID" baseTableName="BAUVORLAGE"
+                                 constraintName="FK_BAUVORLAGE_ON_ANTRAG" referencedColumnNames="ID"
+                                 referencedTableName="ANTRAG"/>
+    </changeSet>
+</databaseChangeLog>

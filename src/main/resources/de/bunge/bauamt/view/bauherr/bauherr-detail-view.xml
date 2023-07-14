@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://bauherrDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="bauherrDc"
+                  class="de.bunge.bauamt.entity.Bauherr">
+            <fetchPlan extends="_base"/>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="bauherrDc">
+            <checkbox id="juristischePersonField" property="juristischePerson"/>
+            <comboBox id="anredeField" property="anrede"/>
+            <textField id="titelField" property="titel"/>
+            <textField id="vornameField" property="vorname"/>
+            <textField id="nachnameField" property="nachname"/>
+            <textField id="namenszusatz1Field" property="namenszusatz1"/>
+            <textField id="nameszusatz2Field" property="nameszusatz2"/>
+            <textField id="strasseField" property="strasse"/>
+            <textField id="hausnummerField" property="hausnummer"/>
+            <textField id="postleitzahlField" property="postleitzahl"/>
+            <textField id="ortField" property="ort"/>
+            <textField id="telefonField" property="telefon"/>
+            <textField id="faxField" property="fax"/>
+            <textField id="mobilField" property="mobil"/>
+            <textField id="emailField" property="email"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
