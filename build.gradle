@@ -47,3 +47,10 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+vaadin {
+    productionMode = true
+}
+
+task stage(dependsOn: ['build', 'clean', 'vaadinPrepareFrontend', 'vaadinBuildFrontend'])
+build.mustRunAfter clean
