@@ -47,6 +47,8 @@ public class Antrag {
     @NotNull
     private LocalDate antragseingang;
 
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BAUHERR_ID")
     private Bauherr bauherr;
@@ -60,6 +62,8 @@ public class Antrag {
     @Lob
     private String vorhabentext;
 
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
     @JoinColumn(name = "ENTWURFSVERFASSER_ID")
     @OneToOne(fetch = FetchType.LAZY)
     private Entwurfsverfasser entwurfsverfasser;
