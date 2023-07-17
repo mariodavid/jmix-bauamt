@@ -15,5 +15,14 @@
             <errorMessage title="msg://loginForm.errorTitle"
                           message="msg://loginForm.badCredentials"/>
         </loginForm>
+
+        <hr />
+        <h4 text="msg://possibleUsers"/>
+        <p text="msg://possibleUsersText" themeNames="success" />
+            <unorderedList>
+                <listItem text="msg://adminUser" />
+                <listItem text="msg://antragsteller1User"/>
+                <listItem text="msg://antragsteller2User"/>
+            </unorderedList>
     </layout>
 </view>

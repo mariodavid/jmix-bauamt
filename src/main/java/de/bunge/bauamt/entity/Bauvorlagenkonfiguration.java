@@ -1,11 +1,8 @@
 package de.bunge.bauamt.entity;
 
-import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.entity.annotation.OnDelete;
-import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -14,21 +11,13 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.UUID;
 
-@DiscriminatorValue("ANTRAG")
 @JmixEntity
-@Table(name = "ANTRAG", indexes = {
-        @Index(name = "IDX_ANTRAG_BAUHERR", columnList = "BAUHERR_ID"),
-        @Index(name = "IDX_ANTRAG_ENTWURFSVERFASSER", columnList = "ENTWURFSVERFASSER_ID")
-})
+@Table(name = "BAUVORLAGENKONFIGURATION")
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
-public class Antrag {
+public class Bauvorlagenkonfiguration {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
@@ -38,38 +27,13 @@ public class Antrag {
     @NotNull
     private String antragsart;
 
-    @Column(name = "STATUS", nullable = false)
+    @Column(name = "BAUVORLAGENTYP", nullable = false)
     @NotNull
-    private String status;
+    private String bauvorlagentyp;
 
-    @Column(name = "AKTENZEICHEN", nullable = false)
     @NotNull
-    private String aktenzeichen;
-
-    @Column(name = "ANTRAGSEINGANG", nullable = false)
-    @NotNull
-    private LocalDate antragseingang;
-
-    @OnDelete(DeletePolicy.CASCADE)
-    @Composition
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "BAUHERR_ID")
-    private Bauherr bauherr;
-
-    @OnDelete(DeletePolicy.CASCADE)
-    @Composition
-    @OneToMany(mappedBy = "antrag")
-    private List<Bauvorlage> bauvorlagen;
-
-    @Column(name = "VORHABENTEXT")
-    @Lob
-    private String vorhabentext;
-
-    @OnDelete(DeletePolicy.CASCADE)
-    @Composition
-    @JoinColumn(name = "ENTWURFSVERFASSER_ID")
-    @OneToOne(fetch = FetchType.LAZY)
-    private Entwurfsverfasser entwurfsverfasser;
+    @Column(name = "PFLICHT", nullable = false)
+    private Boolean pflicht = false;
 
     @Column(name = "VERSION", nullable = false)
     @Version
@@ -99,60 +63,20 @@ public class Antrag {
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
 
-    public Entwurfsverfasser getEntwurfsverfasser() {
-        return entwurfsverfasser;
+    public Boolean getPflicht() {
+        return pflicht;
     }
 
-    public void setEntwurfsverfasser(Entwurfsverfasser entwurfsverfasser) {
-        this.entwurfsverfasser = entwurfsverfasser;
+    public void setPflicht(Boolean pflicht) {
+        this.pflicht = pflicht;
     }
 
-    public String getVorhabentext() {
-        return vorhabentext;
+    public Bauvorlagentyp getBauvorlagentyp() {
+        return bauvorlagentyp == null ? null : Bauvorlagentyp.fromId(bauvorlagentyp);
     }
 
-    public void setVorhabentext(String vorhabentext) {
-        this.vorhabentext = vorhabentext;
-    }
-
-    public List<Bauvorlage> getBauvorlagen() {
-        return bauvorlagen;
-    }
-
-    public void setBauvorlagen(List<Bauvorlage> bauvorlagen) {
-        this.bauvorlagen = bauvorlagen;
-    }
-
-    public Bauherr getBauherr() {
-        return bauherr;
-    }
-
-    public void setBauherr(Bauherr bauherr) {
-        this.bauherr = bauherr;
-    }
-
-    public LocalDate getAntragseingang() {
-        return antragseingang;
-    }
-
-    public void setAntragseingang(LocalDate antragseingang) {
-        this.antragseingang = antragseingang;
-    }
-
-    public String getAktenzeichen() {
-        return aktenzeichen;
-    }
-
-    public void setAktenzeichen(String aktenzeichen) {
-        this.aktenzeichen = aktenzeichen;
-    }
-
-    public Antragsstatus getStatus() {
-        return status == null ? null : Antragsstatus.fromId(status);
-    }
-
-    public void setStatus(Antragsstatus status) {
-        this.status = status == null ? null : status.getId();
+    public void setBauvorlagentyp(Bauvorlagentyp bauvorlagentyp) {
+        this.bauvorlagentyp = bauvorlagentyp == null ? null : bauvorlagentyp.getId();
     }
 
     public Antragsart getAntragsart() {

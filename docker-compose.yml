@@ -2,11 +2,11 @@ version: "3.9"
 
 services:
   postgres:
-    image: postgres:13.5-alpine
+    image: postgres:14.6-alpine
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: postgres
+      POSTGRES_DB: bauamt
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:

@@ -37,6 +37,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
 
+    implementation 'net.datafaker:datafaker:1.6.0'
+
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
@@ -52,5 +55,5 @@ vaadin {
     productionMode = true
 }
 
-//task stage(dependsOn: ['build', 'clean', 'vaadinPrepareFrontend'])
-//build.mustRunAfter clean
+task stage(dependsOn: ['build', 'clean', 'vaadinPrepareFrontend'])
+build.mustRunAfter clean

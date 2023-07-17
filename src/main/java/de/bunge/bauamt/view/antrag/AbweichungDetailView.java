@@ -1,16 +1,23 @@
 package de.bunge.bauamt.view.antrag;
 
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.router.Route;
 import de.bunge.bauamt.entity.*;
+
+import de.bunge.bauamt.view.antrag.BauherrGenerator;
+import de.bunge.bauamt.view.antrag.BauvorlagenFactory;
 import de.bunge.bauamt.view.main.MainView;
+
+import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.core.TimeSource;
 import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
 import io.jmix.flowui.UiComponents;
+import io.jmix.flowui.component.combobox.JmixComboBox;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.validation.ValidationErrors;
 import io.jmix.flowui.model.CollectionPropertyContainer;
@@ -19,11 +26,14 @@ import io.jmix.flowui.model.InstancePropertyContainer;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Route(value = "antraege/:id", layout = MainView.class)
-@ViewController("Antrag.detail")
-@ViewDescriptor("antrag-detail-view.xml")
+import java.util.List;
+
+@Route(value = "abweichungs/:id", layout = MainView.class)
+@ViewController("Abweichung.detail")
+@ViewDescriptor("abweichung-detail-view.xml")
 @EditedEntityContainer("antragDc")
-public class AntragDetailView extends StandardDetailView<Antrag> {
+public class AbweichungDetailView extends StandardDetailView<Abweichung> {
+
     @Autowired
     private TimeSource timeSource;
     private Antragsart antragsart;
@@ -43,6 +53,10 @@ public class AntragDetailView extends StandardDetailView<Antrag> {
     private BauherrGenerator bauherrGenerator;
     @Autowired
     private BauvorlagenFactory bauvorlagenFactory;
+    @ViewComponent
+    private ComboBox<Abweichungsunterkategorie> unterkategorieField;
+    @Autowired
+    private DataManager dataManager;
 
     @Subscribe
     public void onInit(InitEvent event) {
@@ -112,5 +126,16 @@ public class AntragDetailView extends StandardDetailView<Antrag> {
         bauherr.setAntrag(getEditedEntity());
         getEditedEntity().setBauherr(bauherr);
         bauherrDc.setItem(bauherr);
+    }
+
+    @Subscribe("kategorieField")
+    public void onKategorieFieldComponentValueChange(final AbstractField.ComponentValueChangeEvent<JmixComboBox<Abweichungskategorie>, Abweichungskategorie> event) {
+        if (event.getValue() != null) {
+            List<Abweichungsunterkategorie> relatedUnterkategorien = dataManager.load(Abweichungsunterkategorie.class)
+                    .all()
+                    .list()
+                    .stream().filter(unterkategorie -> unterkategorie.getKategorie().equals(event.getValue())).toList();
+            unterkategorieField.setItems(relatedUnterkategorien);
+        }
     }
 }

@@ -1,9 +1,6 @@
 package de.bunge.bauamt.security;
 
-import de.bunge.bauamt.entity.Antrag;
-import de.bunge.bauamt.entity.Bauherr;
-import de.bunge.bauamt.entity.Bauvorlage;
-import de.bunge.bauamt.entity.Entwurfsverfasser;
+import de.bunge.bauamt.entity.*;
 import io.jmix.security.model.EntityAttributePolicyAction;
 import io.jmix.security.model.EntityPolicyAction;
 import io.jmix.security.role.annotation.EntityAttributePolicy;
@@ -17,7 +14,7 @@ public interface AntragstellerRole {
     String CODE = "antragsteller-role";
 
     @MenuPolicy(menuIds = "Antrag.list")
-    @ViewPolicy(viewIds = {"Antrag.detail", "Antrag.list", "Bauherr.detail", "Bauvorlage.detail", "Entwurfsverfasser.detail", "LoginView"})
+    @ViewPolicy(viewIds = {"Antrag.detail", "Antrag.list", "Bauherr.detail", "Bauvorlage.detail", "Entwurfsverfasser.detail", "LoginView", "Abweichung.detail"})
     void screens();
 
     @EntityAttributePolicy(entityClass = Antrag.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
@@ -35,4 +32,16 @@ public interface AntragstellerRole {
     @EntityAttributePolicy(entityClass = Entwurfsverfasser.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     @EntityPolicy(entityClass = Entwurfsverfasser.class, actions = EntityPolicyAction.ALL)
     void entwurfsverfasser();
+
+    @EntityAttributePolicy(entityClass = Bauvorlagenkonfiguration.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityPolicy(entityClass = Bauvorlagenkonfiguration.class, actions = EntityPolicyAction.READ)
+    void bauvorlagenkonfiguration();
+
+    @EntityAttributePolicy(entityClass = Abweichungsunterkategorie.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityPolicy(entityClass = Abweichungsunterkategorie.class, actions = EntityPolicyAction.READ)
+    void abweichungsunterkategorie();
+
+    @EntityAttributePolicy(entityClass = Abweichung.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
+    @EntityPolicy(entityClass = Abweichung.class, actions = EntityPolicyAction.ALL)
+    void abweichung();
 }

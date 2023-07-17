@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://jmix.io/schema/flowui/menu">
 
-    <menu id="application" title="msg://de.bunge.bauamt/menu.application.title" opened="true">
-        <item view="User.list" title="msg://de.bunge.bauamt.view.user/UserListView.title"/>
-        <item view="Antrag.list" title="msg://de.bunge.bauamt.view.antrag/antragListView.title"/>
+    <item view="Antrag.list" title="msg://de.bunge.bauamt.view.antrag/antragListView.title"/>
+    <menu id="administration" description="msg://de.bunge.bauamt/menu_config.administration.description"
+          title="msg://de.bunge.bauamt/menu_config.administration.title">
+        <item view="Bauvorlagenkonfiguration.list"
+              title="msg://de.bunge.bauamt.view.bauvorlagenkonfiguration/bauvorlagenkonfigurationListView.title"/>
+        <item view="Abweichungsunterkategorie.list"
+              title="msg://de.bunge.bauamt.view.abweichungsunterkategorie/abweichungsunterkategorieListView.title"/>
     </menu>
-
+    <menu id="security" title="msg://de.bunge.bauamt/menu.security.title">
+        <item view="User.list" title="msg://de.bunge.bauamt.view.user/UserListView.title"/>
+        <item view="sec_ResourceRoleModel.list"
+              title="msg://io.jmix.securityflowui.view.resourcerole/resourceRoleModelListView.menu"/>
+        <item view="sec_RowLevelRoleModel.list"
+              title="msg://io.jmix.securityflowui.view.rowlevelrole/rowLevelRoleModelListView.menu"/>
+    </menu>
+    <menu id="datatools" title="msg://de.bunge.bauamt/menu.datatools.title">
+        <item view="datatl_entityInspectorListView"
+              title="msg://io.jmix.datatoolsflowui.view.entityinspector/listTitle"/>
+    </menu>
+    <menu id="system" title="msg://de.bunge.bauamt/menu.system.title">
+        <item view="sys_LockInfo.list"
+              title="msg://io.jmix.flowui.app.pessimisticlocking/pessimisticLockListView.menu"/>
+    </menu>
 </menu-config>
