@@ -26,7 +26,10 @@ For simplicity' sake the UI views for both entities are different view classes. 
 
 ### Deploy to Heroku
 
-1. Create a production mode jar 
+The example app also shows how to deploy a Jmix app to Heroku. The following steps are necessary:
+
+1. Create a Jar file with Vaadin production mode (see `build.gradle` `stage` task)
+
 ```shell
 ./gradlew stage
 ```
@@ -40,3 +43,6 @@ heroku plugins:install java
 ```shell
 heroku deploy:jar build/libs/bauamt-0.0.1-SNAPSHOT.jar --app jmix-bauamt
 ```
+
+
+It should also be possible to let Heroku build the app itself, but there were some node.js heap space errors, that let me to manually deploy the jar (either via local computer or some dedicated CI system).
