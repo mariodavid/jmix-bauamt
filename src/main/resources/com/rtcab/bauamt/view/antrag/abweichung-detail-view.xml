@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://abweichungDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="antragDc"
+                  class="com.rtcab.bauamt.entity.Abweichung">
+            <fetchPlan extends="_base">
+                <property name="bauherr" fetchPlan="_base"/>
+                <property name="bauvorlagen" fetchPlan="_base"/>
+                <property name="entwurfsverfasser" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="bauvorlagenDc" property="bauvorlagen"/>
+            <instance id="bauherrDc" property="bauherr"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <tabSheet width="100%">
+            <tab id="vorhaben" label="msg://vorhaben">
+                <formLayout dataContainer="antragDc" >
+                    <comboBox id="kategorieField" property="kategorie"/>
+                    <comboBox id="unterkategorieField" property="unterkategorie"/>
+                </formLayout>
+            </tab>
+            <tab id="begruendung" label="msg://vorhaben">
+                <textArea dataContainer="antragDc"
+                          id="begruendungField"
+                          height="20em"
+                          width="100%"
+                          label="msg://begruendung"
+                          property="begruendung"/>
+            </tab>
+            <tab id="baugrundstueck" label="msg://baugrundstueck">
+                <h5 text="msg://..."/>
+            </tab>
+            <tab id="bauherr" label="msg://bauherr">
+                <formLayout id="bauherrForm" dataContainer="bauherrDc">
+                    <checkbox id="juristischePersonField" property="juristischePerson"/>
+                    <label text="msg://spacer"/>
+                    <comboBox id="anredeField" property="anrede"/>
+                    <textField id="titelField" property="titel"/>
+                    <textField id="vornameField" property="vorname"/>
+                    <textField id="nachnameField" property="nachname"/>
+                    <textField id="namenszusatz1Field" property="namenszusatz1"/>
+                    <textField id="nameszusatz2Field" property="nameszusatz2"/>
+                    <textField id="strasseField" property="strasse"/>
+                    <textField id="hausnummerField" property="hausnummer"/>
+                    <textField id="postleitzahlField" property="postleitzahl"/>
+                    <textField id="ortField" property="ort"/>
+                    <textField id="telefonField" property="telefon"/>
+                    <textField id="faxField" property="fax"/>
+                    <textField id="mobilField" property="mobil"/>
+                    <textField id="emailField" property="email"/>
+                </formLayout>
+            </tab>
+            <tab id="bauvorlagen" label="msg://bauvorlagen">
+                <vbox>
+                    <h3 text="msg://bauvorlagen"/>
+                    <hbox id="buttonsPanel" classNames="buttons-panel">
+                        <button action="bauvorlagenDataGrid.edit" />
+                    </hbox>
+                    <dataGrid id="bauvorlagenDataGrid" dataContainer="bauvorlagenDc" width="100%" minHeight="20em">
+                        <actions>
+                            <action id="edit" type="list_edit" text="msg://upload" icon="UPLOAD">
+                                <properties>
+                                    <property name="openMode" value="DIALOG"/>
+                                </properties>
+                            </action>
+                        </actions>
+                        <columns>
+                            <column property="typ"/>
+                        </columns>
+                    </dataGrid>
+                </vbox>
+            </tab>
+        </tabSheet>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

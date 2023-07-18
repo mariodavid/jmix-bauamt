@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JmixDataStoreSettingsManager">
     <moduleSettings>
-      <entry key="de.bunge.bauamt.main">
+      <entry key="com.rtcab.bauamt.main">
         <ModuleSettings>
           <option name="dataStoreOptionsV2">
             <map>

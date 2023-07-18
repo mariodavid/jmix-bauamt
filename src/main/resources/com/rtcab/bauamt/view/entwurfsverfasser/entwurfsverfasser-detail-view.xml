@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://entwurfsverfasserDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="entwurfsverfasserDc"
+                  class="com.rtcab.bauamt.entity.Entwurfsverfasser">
+            <fetchPlan extends="_base"/>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="entwurfsverfasserDc">
+            <textField id="vornameField" property="vorname"/>
+            <textField id="nachnameField" property="nachname"/>
+            <textField id="nameszusatz1Field" property="nameszusatz1"/>
+            <textField id="nameszusatz2Field" property="nameszusatz2"/>
+            <textField id="berufsbezeichnungField" property="berufsbezeichnung"/>
+            <textField id="strasseField" property="strasse"/>
+            <textField id="hausnummerField" property="hausnummer"/>
+            <textField id="postleitzahlField" property="postleitzahl"/>
+            <textField id="ortField" property="ort"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
